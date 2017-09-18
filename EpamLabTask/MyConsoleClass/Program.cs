@@ -87,10 +87,7 @@ namespace MyConsoleClass
 
         static void Main(string[] args)
         {
-            var m = new MyCalcClass();
-          
- 
-
+            
             try
             {
                 UseLibraryMethods();
