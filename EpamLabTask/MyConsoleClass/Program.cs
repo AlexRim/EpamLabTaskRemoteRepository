@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyCalcLibrary;
 using static System.Console;
+
 
 namespace MyConsoleClass
 {
@@ -18,6 +20,7 @@ namespace MyConsoleClass
 
             while (true)
             {
+                
              
                 WriteLine("Input first value:");
                 var integer1 = ReadLine();
@@ -44,17 +47,22 @@ namespace MyConsoleClass
 
         static void Main(string[] args)
         {
+            var m = new MyCalcClass();
+          
+ 
 
             try
             {
-                AddTwoIntegersMethod();
-                ReadKey();
+                //  AddTwoIntegersMethod();
+                WriteLine(m.Divide(17,0));
+         
             }
             catch (Exception ex)
             {
                 WriteLine(ex.Message);
+               
             }
-
+            ReadKey();
         }
     }
 }
