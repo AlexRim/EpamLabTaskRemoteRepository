@@ -13,28 +13,26 @@ namespace MyConsoleClass
     class Program
     {
 
+
       
 
-        private static void ChooseMethodToCalculate()
+
+        private static void ChooseMethodToCalculateValueGetFromConfigurationFile()
         {
             WriteLine("Input key:\n" + "key0:if You want to use ConsoleClassMethod" + "\n" + "key1:if You want to use LibraryMethod");
             var key= ReadLine();
             var val= ConfigurationManager.AppSettings[key];
-            //if(val==null)
-            //{
-            //    WriteLine("Wrong key was inputed!");
-            //}
             switch (val)
             {
                 case "0": AddTwoIntegersMethod(); break;
                 case "1": UseLibraryMethods(); break;
                 default: WriteLine("Wrong key was inputed!"); break;
             }
-                
-        
-
-
+                             
         }
+
+
+
 
         private static void UseLibraryMethods()
         {
@@ -108,12 +106,13 @@ namespace MyConsoleClass
 
         static void Main(string[] args)
         {
-
+          var i=  Resource1.String1;
          
             try
             {
-                ChooseMethodToCalculate();
-         
+                ChooseMethodToCalculateValueGetFromConfigurationFile();
+
+
             }
             catch (Exception ex)
             {
