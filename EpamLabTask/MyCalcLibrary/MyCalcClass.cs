@@ -8,9 +8,9 @@ namespace MyCalcLibrary
 {
    public class MyCalcClass
     {
-        public double Add(double x, double y) => x + y;
+        public double Add(int x, int y) => x + y;
 
-        public double Divide(double x, double y)
+        public double Divide(int x, int y)
         {
             if(y==0)
             {
@@ -24,10 +24,10 @@ namespace MyCalcLibrary
         }
 
 
-        public double Multyply(double x, double y) => x * y;
+        public long Multyply(int x, int y) => x * y;
 
 
-        public double Substract(double x, double y) => x - y;
+        public double Substract(int x, int y) => x - y;
 
 
 
