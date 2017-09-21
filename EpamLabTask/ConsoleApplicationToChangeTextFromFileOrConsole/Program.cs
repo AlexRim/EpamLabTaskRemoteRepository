@@ -25,12 +25,23 @@ namespace ConsoleApplicationToChangeTextFromFileOrConsole
                     myCharArray[i] = char.ToLower(myCharArray[i]);
                 }
             }
-
-            string str = new string(myCharArray);
-            return str;
+          string str = new string(myCharArray);
+          return str;
         }
 
+        private static void AddNewLine(string text)
+        {
+            var st = new StringBuilder(text);
 
+            for(int i=0; i<st.Length;i++)
+            {
+                if(st[i]=='.')
+                {
+                   
+                }
+            }
+
+        }
 
 
 
