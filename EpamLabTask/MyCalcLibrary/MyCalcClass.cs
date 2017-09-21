@@ -8,10 +8,11 @@ namespace MyCalcLibrary
 {
    public class MyCalcClass
     {
-        public double Add(int x, int y) => x + y;
+        public int Add(int x, int y) => x + y;
 
-        public double Divide(int x, int y)
+        public double Divide(double x, double y)
         {
+           
             if(y==0)
             {
                 throw new DivideByZeroException();
@@ -20,14 +21,14 @@ namespace MyCalcLibrary
             {
                 return x / y;
             }
-
+          
         }
 
 
         public long Multiply(int x, int y) => x * y;
 
 
-        public double Substract(int x, int y) => x - y;
+        public int Substract(int x, int y) => x - y;
 
 
 

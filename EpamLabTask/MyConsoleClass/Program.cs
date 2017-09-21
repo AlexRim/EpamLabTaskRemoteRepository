@@ -19,7 +19,7 @@ namespace MyConsoleClass
 
             while (intList.Count != 2)
             {
-                WriteLine("Input {0} value:", intList.Count);
+                WriteLine("Input {0} value:", intList.Count+1);
                 var str = ReadLine();
                if(int.TryParse(str, out number))
                 {
@@ -59,17 +59,16 @@ namespace MyConsoleClass
             return intList;
         }
 
-        private static void PrintMenu() => WriteLine("Input: '1' task 'b' solution\n" + "Input '2' task 'e' solution\n" + 
-            "Input: '3' task 'f' solution\n" + "Input '4' task i");
+        private static void PrintMenu() => WriteLine("Input: '1' to check task 'b' \n" + "Input: '2' to check task 'e'\n" +
+            "Input: '3' to check task 'f' \n" + "Input: '4' to check task 'i'\n ");
 
-        private static void PrintResultsUsindLibraryClassMethods(int x, int y)
+        private static void PrintResultsUsingLibraryClassMethods(int x, int y)
         {
             var myObj = new MyCalcClass();
-            WriteLine(myObj.Add(x, y));
-            WriteLine(myObj.Divide(x, y));
-            WriteLine(myObj.Substract(x, y));
-            WriteLine(myObj.Multiply(x, y));
-
+            WriteLine("Adding result={0}",myObj.Add(x, y));
+            WriteLine("Substract result={0}", myObj.Substract(x, y));
+            WriteLine("Multiply result={0}",myObj.Multiply(x, y));
+            WriteLine("Division result={0}", myObj.Divide(x, y));
         }
 
 
@@ -77,34 +76,33 @@ namespace MyConsoleClass
         {
             PrintMenu();
             string str = null;
-
             str = ReadLine();
             List<int> list;
 
             switch (str)
             {
                 case "1":
-                     list = InputFromConsoleData();
-                    WriteLine(ConsoleAddMethod(list));
+                    list = InputFromConsoleData(); 
+                    WriteLine("The answer:{0}",ConsoleAddMethod(list));
                     break;
 
                 case "2":
                      list = InputFromConsoleData();
-                    PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                    PrintResultsUsingLibraryClassMethods(list[0], list[1]);
                     break;
 
                 case "3":
-                     list = InputFromConsoleData();
-                    WriteLine("Input 'key0' to use methods from library\n Input 'key1' to use method from this class\n");
+                    list = InputFromConsoleData();
+                    WriteLine("Input 'key0' to use methods from library\nInput 'key1' to use method from this class");
                     string str1 = ReadLine();
                     var switchKey = ConfigurationManager.AppSettings[str1];
                     if (switchKey == "0")
                     {
-                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                        PrintResultsUsingLibraryClassMethods(list[0], list[1]);
                     }
                     else if (switchKey == "1")
                     {
-                        WriteLine(ConsoleAddMethod(list));
+                        WriteLine("Result={0}",ConsoleAddMethod(list));
                     }
                     else
                     {
@@ -112,19 +110,18 @@ namespace MyConsoleClass
                     }
                     break;
 
-
                 case "4":
-                    WriteLine("Input 'key0' to use methods from library\n Input 'key1' to use method from this class\n");
+                    WriteLine("Input 'key0' to use methods from library\nInput 'key1' to use method from this class");
                     var str2 = ReadLine();
                     switchKey = ConfigurationManager.AppSettings[str2];
-                    WriteLine("Input 'key2' to use data from file\n");
+                    WriteLine("Input 'key2' to use data from file or something else to input from console");
                     var str3 = ReadLine();
-                    var switchKey1 = ConfigurationManager.AppSettings[str2];
+                    var switchKey1 = ConfigurationManager.AppSettings[str3];
                     
                     if (switchKey == "0" && switchKey1 == "2")
                     {
-                         list = DataFromResources();
-                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                        list = DataFromResources();
+                        PrintResultsUsingLibraryClassMethods(list[0], list[1]);
                     }
                     else if (switchKey == "1" && switchKey1=="2")
                      {
@@ -132,26 +129,23 @@ namespace MyConsoleClass
                         list = DataFromResources();
                         WriteLine(ConsoleAddMethod(list));
                     }
- 	                    else if (switchKey == "0" && switchKey1 != "2")
+ 	                else if (switchKey == "0" && switchKey1 != "2")
                     {
                          list = InputFromConsoleData();
-                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                        PrintResultsUsingLibraryClassMethods(list[0], list[1]);
                     }
                     else if (switchKey == "1" && switchKey1 != "2")
                     {
                         list = InputFromConsoleData();
                         WriteLine(ConsoleAddMethod(list));
                     }
+                    else
+                    {
+                        WriteLine("Wrong configuration parameter/s was/were inputed!");
+                    }
                     break;
 
             }
-
-
-
-
-
-
-
 
         }
 
@@ -168,15 +162,12 @@ namespace MyConsoleClass
           
          
             try
-            {
-
-                Calculate();
-
+            {           
+             Calculate();
             }
             catch (Exception ex)
             {
-                WriteLine(ex.Message);
-               
+                WriteLine(ex.Message);    
             }
             ReadKey();
         }
