@@ -150,13 +150,6 @@ namespace MyConsoleClass
         }
 
 
-
-
-
-
-
-
-
         static void Main(string[] args)
         {
           
