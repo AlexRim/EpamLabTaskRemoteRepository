@@ -24,7 +24,7 @@ namespace MyCalcLibrary
         }
 
 
-        public long Multyply(int x, int y) => x * y;
+        public long Multiply(int x, int y) => x * y;
 
 
         public double Substract(int x, int y) => x - y;

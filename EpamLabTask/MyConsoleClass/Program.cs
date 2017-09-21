@@ -12,106 +12,165 @@ namespace MyConsoleClass
 {
     class Program
     {
-
-
-      
-
-
-        private static void ChooseMethodToCalculateValueGetFromConfigurationFile()
+        private static List<int> InputFromConsoleData()
         {
-            WriteLine("Input key:\n" + "key0:if You want to use ConsoleClassMethod" + "\n" + "key1:if You want to use LibraryMethod");
-            var key= ReadLine();
-            var val= ConfigurationManager.AppSettings[key];
-            switch (val)
+            int number = 0;
+            var intList = new List<int>();
+
+            while (intList.Count != 2)
             {
-                case "0": AddTwoIntegersMethod(); break;
-                case "1": UseLibraryMethods(); break;
-                default: WriteLine("Wrong key was inputed!"); break;
-            }
-                             
-        }
-
-
-
-
-        private static void UseLibraryMethods()
-        {
-            var calc = new MyCalcClass();
-
-            int x = 0;
-            int y = 0;
-            while (true)
-            {        
-                WriteLine("Input first value:");
-                var integer1 = ReadLine();
-                WriteLine("Input second value:");
-                var integer2 = ReadLine();
-
-                if (Int32.TryParse(integer1, out x) && Int32.TryParse(integer2, out y))
+                WriteLine("Input {0} value:", intList.Count);
+                var str = ReadLine();
+               if(int.TryParse(str, out number))
                 {
-
-                    WriteLine("Sum={0}", calc.Add(x, y));
-                    try
-                    {
-                        WriteLine("Division Result={0}", calc.Divide(x, y));
-                    }
-                    catch (DivideByZeroException ex)
-                    {
-                        WriteLine(ex.Message);
-                    }
-                    WriteLine("Multyply Result={0}", calc.Multyply(x, y));
-                    WriteLine("Substract Result={0}", calc.Substract(x, y));
-                    break;
+                    intList.Add(number);
                 }
-                else
-                {
-                    WriteLine("One of params has wrong format or size!" + "\n");
+		        else
+		        {
+                    WriteLine("Wrong input format or size of variable ");
                     continue;
-                }
-
+                }  
             }
+                return intList;
         }
 
-        private static void AddTwoIntegersMethod()
-        {
-            int x = 0;
-            int y = 0;
+        private static int ConsoleAddMethod(List<int> list) => list[0] +list[1];
 
-            while (true)
+        private static List<int> DataFromResources()
+        {
+            int num1 = 0;
+            int num2 = 0;
+
+            var number1 = Resource1.String1;
+            var number2 = Resource1.String2;
+
+            var intList = new List<int>();
+
+            if (int.TryParse(number1, out num1) && int.TryParse(number2, out num2))
             {
-                
-             
-                WriteLine("Input first value:");
-                var integer1 = ReadLine();
-                WriteLine("Input second value:");
-                var integer2 = ReadLine();
+                intList.Add(num1);
+                intList.Add(num2);
+            }
+            else
+            {
+                WriteLine("Variable(s) from resource file has(ve) wrong format or size");
+            }
 
-                if (Int32.TryParse(integer1, out x) && Int32.TryParse(integer2, out y))
-                {
-                    int sum = y + x;
-                    WriteLine("Sum={0}", sum);
+            return intList;
+        }
+
+        private static void PrintMenu() => WriteLine("Input: '1' task 'b' solution\n" + "Input '2' task 'e' solution\n" + 
+            "Input: '3' task 'f' solution\n" + "Input '4' task i");
+
+        private static void PrintResultsUsindLibraryClassMethods(int x, int y)
+        {
+            var myObj = new MyCalcClass();
+            WriteLine(myObj.Add(x, y));
+            WriteLine(myObj.Divide(x, y));
+            WriteLine(myObj.Substract(x, y));
+            WriteLine(myObj.Multiply(x, y));
+
+        }
+
+
+        private static void Calculate()
+        {
+            PrintMenu();
+            string str = null;
+
+            str = ReadLine();
+            List<int> list;
+
+            switch (str)
+            {
+                case "1":
+                     list = InputFromConsoleData();
+                    WriteLine(ConsoleAddMethod(list));
                     break;
-                }
-                else
-                {
-                    WriteLine("One of params has wrong format!"+"\n");
-                    continue;
-                }
+
+                case "2":
+                     list = InputFromConsoleData();
+                    PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                    break;
+
+                case "3":
+                     list = InputFromConsoleData();
+                    WriteLine("Input 'key0' to use methods from library\n Input 'key1' to use method from this class\n");
+                    string str1 = ReadLine();
+                    var switchKey = ConfigurationManager.AppSettings[str1];
+                    if (switchKey == "0")
+                    {
+                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                    }
+                    else if (switchKey == "1")
+                    {
+                        WriteLine(ConsoleAddMethod(list));
+                    }
+                    else
+                    {
+                        WriteLine("Wrong configuration parameter was inputed!");
+                    }
+                    break;
+
+
+                case "4":
+                    WriteLine("Input 'key0' to use methods from library\n Input 'key1' to use method from this class\n");
+                    var str2 = ReadLine();
+                    switchKey = ConfigurationManager.AppSettings[str2];
+                    WriteLine("Input 'key2' to use data from file\n");
+                    var str3 = ReadLine();
+                    var switchKey1 = ConfigurationManager.AppSettings[str2];
+                    
+                    if (switchKey == "0" && switchKey1 == "2")
+                    {
+                         list = DataFromResources();
+                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                    }
+                    else if (switchKey == "1" && switchKey1=="2")
+                     {
+     
+                        list = DataFromResources();
+                        WriteLine(ConsoleAddMethod(list));
+                    }
+ 	                    else if (switchKey == "0" && switchKey1 != "2")
+                    {
+                         list = InputFromConsoleData();
+                        PrintResultsUsindLibraryClassMethods(list[0], list[1]);
+                    }
+                    else if (switchKey == "1" && switchKey1 != "2")
+                    {
+                        list = InputFromConsoleData();
+                        WriteLine(ConsoleAddMethod(list));
+                    }
+                    break;
+
             }
 
 
 
+
+
+
+
+
         }
+
+
+
+
+
+
+
 
 
         static void Main(string[] args)
         {
-          var i=  Resource1.String1;
+          
          
             try
             {
-                ChooseMethodToCalculateValueGetFromConfigurationFile();
 
+                Calculate();
 
             }
             catch (Exception ex)
