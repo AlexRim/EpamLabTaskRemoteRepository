@@ -35,7 +35,6 @@ namespace ConsoleApplicationToChangeTextFromFileOrConsole
             return strBuildList;
         }
 
-
         private static string AddCurrentDateTime(List<StringBuilder> list)
         {
             string newText = null;
