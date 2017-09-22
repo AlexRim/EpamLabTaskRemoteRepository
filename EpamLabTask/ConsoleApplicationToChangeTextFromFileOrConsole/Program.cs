@@ -47,15 +47,78 @@ namespace ConsoleApplicationToChangeTextFromFileOrConsole
             return newText;
         }
 
-
-        static void Main(string[] args)
+        private static void Menu()
         {
-            string text = ReadTextFromFile(@".\TextFile.txt");
+            WriteLine("Press '1' to get Text from file\nPress '2' to input text from console\nPress '3' to use my file\n Press '4'to exit");
+            string select = ReadLine();
+            switch (select)
+            {      
+                
+
+                case "1":
+                    string textFromFile = null;
+                    WriteLine("input the path:");
+                    string path = ReadLine();
+                    try
+                    {
+                        textFromFile = ReadTextFromFile(path);
+                    }
+                    catch(IOException ex)
+                    {
+                       WriteLine( ex.StackTrace);
+                    }
+                    string result= ManageMethod(textFromFile);
+                    WriteLine(result);
+                    break;
+
+                case "2":
+                    WriteLine("Input text:");
+                    string textFromConsole = ReadLine();
+                     WriteLine(ManageMethod(textFromConsole));
+                    break;
+
+                case "3":
+                    string textFromMyFile = null;
+                    try
+                    {
+                        textFromMyFile = ReadTextFromFile(@".\TextFile.txt");
+                    }
+                    catch (IOException ex)
+                    {
+                        WriteLine(ex.StackTrace);
+                    }
+                   WriteLine( ManageMethod(textFromMyFile));
+
+                    break;
+                case "4": break;
+            }
+
+
+        }
+
+        private static string ManageMethod(string text)
+        {
             string[] strArr = SplitTextOnSentences(text);
             var listStrBuilder = ChangeUpperCaseLiteralsToLowerCase(strArr);
             var finalString = AddCurrentDateTime(listStrBuilder);
-            WriteLine(finalString);
+            return finalString;
 
+        }
+
+
+
+
+
+        static void Main(string[] args)
+        {
+            try
+            {
+                Menu();
+            }
+            catch(Exception ex)
+            {
+                WriteLine(ex.Message);
+            }
 
             Console.ReadKey();
         }
