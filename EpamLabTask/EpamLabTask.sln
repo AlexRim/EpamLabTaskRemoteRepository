@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyConsoleClass", "MyConsole
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationToChangeTextFromFileOrConsole", "ConsoleApplicationToChangeTextFromFileOrConsole\ConsoleApplicationToChangeTextFromFileOrConsole.csproj", "{F12B0F66-8C58-4E96-8E8A-29E6B107BED0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppCollectValuesFromInputedString", "ConsoleAppCollectValuesFromInputedString\ConsoleAppCollectValuesFromInputedString.csproj", "{7E41243C-7B3A-4304-A1D9-0539795911D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F12B0F66-8C58-4E96-8E8A-29E6B107BED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12B0F66-8C58-4E96-8E8A-29E6B107BED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12B0F66-8C58-4E96-8E8A-29E6B107BED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E41243C-7B3A-4304-A1D9-0539795911D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E41243C-7B3A-4304-A1D9-0539795911D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E41243C-7B3A-4304-A1D9-0539795911D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E41243C-7B3A-4304-A1D9-0539795911D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

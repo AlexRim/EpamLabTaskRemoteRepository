@@ -113,6 +113,7 @@ namespace ConsoleApplicationToChangeTextFromFileOrConsole
         {
             try
             {
+                
                 Menu();
             }
             catch(Exception ex)
