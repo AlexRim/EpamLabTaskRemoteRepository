@@ -54,15 +54,16 @@ namespace ConsoleAppCollectValuesFromInputedString
         private static void Display()
         {
             var list = InputLines();
-          //  var list = new List<string>();// {"3","3,5","4","5","3,5","3","8,87768768","fvdf","avdf","bvdf","abcdfgh" };
+         //  var list = new List<string>() {"3","3,5","4","5","3,5","3","8,87768768","fvdf","avdf","bvdf","abcdfgh" };
             var integers =list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsInteger(b));
             var doubles = list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsDouble(b));
             var strings = list.Where(x => !Checker.IsDouble(x) && !Checker.IsInteger(x));
-
+            WriteLine("Defulte values:");
            foreach(var i in list)
             {
                 Write(i + ":");
             }
+
             WriteLine();
             WriteLine("Integers count={0}",integers.Count());
             WriteLine("Doubles count={0}", doubles.Count());
@@ -71,18 +72,18 @@ namespace ConsoleAppCollectValuesFromInputedString
                 WriteLine("Integers:");
                 foreach (var i in integers)
                 {
-                    WriteLine(i.PadRight(10));
+                    WriteLine(i.PadLeft(10));
                 }
-                WriteLine("Average=" + GetAverage(integers).PadRight(10));
+                WriteLine("Average=" + GetAverage(integers).PadLeft(5));
             }
             if (doubles.Count() > 0)
             {
                 WriteLine("Doubles:");
                 foreach (var i in doubles)
                 {
-                    WriteLine(String.Format("{0:0.00}", Convert.ToDouble(i)).PadRight(10));
+                    WriteLine(String.Format("{0:0.00}", Convert.ToDouble(i)).PadLeft(12));
                 }
-                WriteLine("Average:" + GetAverage(doubles).PadRight(5));
+                WriteLine("Average:" + GetAverage(doubles).PadLeft(4));
             }
             if (strings.Count() > 0)
                 {
@@ -92,7 +93,7 @@ namespace ConsoleAppCollectValuesFromInputedString
                 WriteLine("NoNs:");
                 foreach (var i in stringList)
                 {
-                    WriteLine(i.PadRight(10));
+                    WriteLine(i.PadLeft(10));
                 }
             }
 
