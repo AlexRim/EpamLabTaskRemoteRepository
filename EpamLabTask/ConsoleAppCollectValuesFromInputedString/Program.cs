@@ -18,22 +18,24 @@ namespace ConsoleAppCollectValuesFromInputedString
     class Program
     {
 
-        
-
         private static List<string> InputLines()
         {
-            string line = null;
+        
             var list = new List<string>();
             int i = 0;
-            while(line!="stop")
+            while(true)
             {
                 WriteLine("Input line {0}", i);
-                line = ReadLine();
+               var line = ReadLine();
+                if (line == "stop")
+                {
+                    break;
+                }
                 i++;
                 if(line=="")
                 {
                     i--;
-                    WriteLine("Line have not to be empty!");
+                    WriteLine("Line can not be empty!");
                     continue;
                 }
                 else
@@ -46,22 +48,72 @@ namespace ConsoleAppCollectValuesFromInputedString
         }
 
 
+        private static String GetAverage(IEnumerable<string> numbers)=>String.Format("{0:0.00}",numbers.Average(x =>Convert.ToDouble(x)));
+       
+
+        private static void Display()
+        {
+            var list = InputLines();
+          //  var list = new List<string>();// {"3","3,5","4","5","3,5","3","8,87768768","fvdf","avdf","bvdf","abcdfgh" };
+            var integers =list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsInteger(b));
+            var doubles = list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsDouble(b));
+            var strings = list.Where(x => !Checker.IsDouble(x) && !Checker.IsInteger(x));
+
+           foreach(var i in list)
+            {
+                Write(i + ":");
+            }
+            WriteLine();
+            WriteLine("Integers count={0}",integers.Count());
+            WriteLine("Doubles count={0}", doubles.Count());
+            if (integers.Count() > 0)
+            {
+                WriteLine("Integers:");
+                foreach (var i in integers)
+                {
+                    WriteLine(i.PadRight(10));
+                }
+                WriteLine("Average=" + GetAverage(integers).PadRight(10));
+            }
+            if (doubles.Count() > 0)
+            {
+                WriteLine("Doubles:");
+                foreach (var i in doubles)
+                {
+                    WriteLine(String.Format("{0:0.00}", Convert.ToDouble(i)).PadRight(10));
+                }
+                WriteLine("Average:" + GetAverage(doubles).PadRight(5));
+            }
+            if (strings.Count() > 0)
+                {
+                List<string> stringList = strings.ToList();
+                stringList.Sort();
+                stringList.Reverse();
+                WriteLine("NoNs:");
+                foreach (var i in stringList)
+                {
+                    WriteLine(i.PadRight(10));
+                }
+            }
+
+        }
+
+
 
 
 
         static void Main(string[] args)
         {
-            double x;
-            var i = ReadLine();
-            if(!double.TryParse(i,out x))
+            try
             {
-                Write("Error");
+                Display();
             }
-            else
+            catch(Exception ex)
             {
-                WriteLine(x);
+                WriteLine(ex.Message);
             }
-         //   var l = InputLines();
+
+
             ReadKey();
         }
     }
