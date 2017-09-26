@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="QuadraticEquationLibrary">
-      <HintPath>..\QuadraticEquationLibrary\bin\Debug\netcoreapp1.1\QuadraticEquationLibrary.dll</HintPath>
+    <ProjectReference Include="..\lib\lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MyLib">
+      <HintPath>..\MyLib\bin\Debug\netcoreapp1.1\MyLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
