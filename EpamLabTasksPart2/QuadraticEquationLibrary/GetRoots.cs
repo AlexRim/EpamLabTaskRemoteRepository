@@ -62,11 +62,7 @@ namespace QuadraticEquationLibrary
             
          private void GetRootsIfLine()
             {
-            //  bx + c = 0;
-
-            this.rootLine = -c / b;
-              
-
+                 this.rootLine = -c / b;
             }
 
 
