@@ -7,7 +7,7 @@ using System.Collections;
 namespace QuadraticEquationLibrary
 {
    
-    class NegativeDiscriminantException: Exception
+   public class NegativeDiscriminantException: Exception
     {
         public NegativeDiscriminantException() { }
         public NegativeDiscriminantException(string message) : base(message) { }

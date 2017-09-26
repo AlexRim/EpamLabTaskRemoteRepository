@@ -1,7 +1,7 @@
 ﻿using System;
-using QuadraticEquationLibrary;
 using static System.Console;
 using System.Text.RegularExpressions;
+using QuadraticEquationLibrary;
 
 namespace EpamLabTasksPart2
 {
@@ -175,13 +175,20 @@ namespace EpamLabTasksPart2
 
         static void Main(string[] args)
         {
-            Menu();
-            //var list = InputValuesForQuadraticEquation();
-            //WriteLine();
-            //foreach(var i in list)
-            //{
-            //    WriteLine(i) ;
-            //}
+            try
+            {
+                Menu();
+                //var list = InputValuesForQuadraticEquation();
+                //WriteLine();
+                //foreach(var i in list)
+                //{
+                //    WriteLine(i) ;
+                //}
+            }
+            catch(Exception ex)
+            {
+              WriteLine(  ex.StackTrace);
+            }
 
             ReadKey();
         }

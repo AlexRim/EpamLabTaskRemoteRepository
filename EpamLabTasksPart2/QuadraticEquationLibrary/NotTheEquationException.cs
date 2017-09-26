@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuadraticEquationLibrary
 {
-    class NotTheEquationException : Exception
+  public  class NotTheEquationException : Exception
     {
             public NotTheEquationException() { }
             public NotTheEquationException(string message) : base(message) { }
