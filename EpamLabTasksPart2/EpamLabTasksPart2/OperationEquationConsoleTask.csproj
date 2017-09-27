@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\lib\lib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="MyLib">
-      <HintPath>..\MyLib\bin\Debug\netcoreapp1.1\MyLib.dll</HintPath>
+      <HintPath>..\MyLib\obj\Debug\netcoreapp1.1\MyLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 

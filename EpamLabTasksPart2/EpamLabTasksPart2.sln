@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationEquationConsoleTask", "EpamLabTasksPart2\OperationEquationConsoleTask.csproj", "{140E9222-6792-485A-8DEA-E995DE9D9D4C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lib", "lib\lib.csproj", "{66DACE05-8F0C-4A3E-8E4E-D0D8B15EF3E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{140E9222-6792-485A-8DEA-E995DE9D9D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{140E9222-6792-485A-8DEA-E995DE9D9D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{140E9222-6792-485A-8DEA-E995DE9D9D4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66DACE05-8F0C-4A3E-8E4E-D0D8B15EF3E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66DACE05-8F0C-4A3E-8E4E-D0D8B15EF3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66DACE05-8F0C-4A3E-8E4E-D0D8B15EF3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66DACE05-8F0C-4A3E-8E4E-D0D8B15EF3E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
