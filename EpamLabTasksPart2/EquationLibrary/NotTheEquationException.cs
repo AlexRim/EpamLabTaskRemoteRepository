@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuadraticEquationLibrary
+namespace EquationLibrary
 {
   public  class NotTheEquationException : Exception
     {

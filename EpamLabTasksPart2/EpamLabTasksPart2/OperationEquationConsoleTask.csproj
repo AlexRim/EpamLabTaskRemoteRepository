@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MyLib">
-      <HintPath>..\MyLib\obj\Debug\netcoreapp1.1\MyLib.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\EquationLibrary\EquationLibrary.csproj" />
   </ItemGroup>
 
 </Project>

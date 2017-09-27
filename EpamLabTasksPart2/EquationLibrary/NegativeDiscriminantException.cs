@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using System.Collections;
 
-namespace QuadraticEquationLibrary
+namespace EquationLibrary
 {
    
    public class NegativeDiscriminantException: Exception

@@ -1,6 +1,7 @@
 ﻿using System;
 using static System.Console;
 using System.Text.RegularExpressions;
+using EquationLibrary;
 
 
 
@@ -143,12 +144,13 @@ namespace EpamLabTasksPart2
             {
                 case "1":
                     var coefficients = InputValuesForQuadraticEquation();
-               var getRoots = new MyLib.GetRoots(coefficients[0], coefficients[1], coefficients[2]);
+               var getRoots = new GetRoots(coefficients[0], coefficients[1], coefficients[2]);
                     int j= 1;
                     foreach(var i in getRoots.QadraticRoots)
                     {
                         WriteLine();
                         WriteLine("The root {0}={1}", j, i);
+                        j++;
                     }
                     break;
 
@@ -179,18 +181,18 @@ namespace EpamLabTasksPart2
 
         static void Main(string[] args)
        {
-            var g = new MyLib.GetRoots(50, 4, 5);
-            foreach (var i in g.QadraticRoots)
-            {
-                WriteLine(i);
-            }
+            //var g = new GetRoots(50, 4, 5);
+            //foreach (var i in g.QadraticRoots)
+            //{
+            //    WriteLine(i);
+            //}
 
-            //  Menu();
+            Menu();
             //var list = InputValuesForQuadraticEquation();
             //WriteLine();
-            //foreach(var i in list)
+            //foreach (var i in list)
             //{
-            //    WriteLine(i) ;
+            //    WriteLine(i);
             //}
 
 

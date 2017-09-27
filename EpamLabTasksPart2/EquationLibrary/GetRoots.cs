@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Math;
 
-namespace MyLib
+namespace EquationLibrary
 {
     public class GetRoots
     {
@@ -55,7 +55,7 @@ namespace MyLib
             {
                qadraticRoots = new double[2];
                qadraticRoots[0] = (-this.b + Sqrt(D)) / 2 * this.a;
-               qadraticRoots[1]= (-this.b + Sqrt(D)) / 2 * this.a;
+               qadraticRoots[1]= (-this.b -Sqrt(D)) / 2 * this.a;
             }
         
         }
