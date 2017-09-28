@@ -13,7 +13,8 @@ namespace TaskRunner
     class Program
     {
 
-
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static void PrintMenu()
         {
@@ -42,12 +43,12 @@ namespace TaskRunner
                         break;
                     }
 
-
                 }              
                 else
                 {
                     WriteLine("Wrong input format, try again!");
                     i--;
+                   log.Info("Wrong input:"+line);
                     continue;
                 }
 
@@ -61,6 +62,7 @@ namespace TaskRunner
 
         private static void Menu()
         {
+          
             PrintMenu();
             string select = ReadLine();
 
@@ -68,18 +70,17 @@ namespace TaskRunner
             {
                 case "1":
                     var coefficientsQ = InputValuesForEquation(3);
-                    var getQuadraticRoots = new GetRoots(coefficientsQ[0], coefficientsQ[1], coefficientsQ[2]);                
-                    foreach (var i in getQuadraticRoots.QadraticRoots)
-                    {
-                        WriteLine();
-                        WriteLine(String.Format("{0:0.00}", i));                  
-                    }
+                    var getQuadraticRoots = new GetRoots(coefficientsQ[0], coefficientsQ[1], coefficientsQ[2]);
+                   log.Info("Quadratic equation: X1="+String.Format("{0:0.00}",getQuadraticRoots.QadraticRoots[0])+" X2="+
+                        String.Format("{0:0.00}", getQuadraticRoots.QadraticRoots[1]));
+
                     break;
 
                 case "2":
                     var coefficientsL = InputValuesForEquation(2);
                     var getLinearRoots = new GetRoots(coefficientsL[0], coefficientsL[1]);
-                    WriteLine(String.Format("{0:0.00}", getLinearRoots.RootLine));
+                   log.Info("Linear equation: X = " + String.Format("{ 0:0.00}", getLinearRoots.RootLine));
+                           
                     break;
 
                 default:
@@ -106,21 +107,22 @@ namespace TaskRunner
 
         static void Main(string[] args)
         {
+            
             try
             {
                 Menu();
             }
             catch (NotTheEquationException ex )
             {
-                WriteLine(ex.Message);
+                log.Error(ex.Message);
             }
             catch(NegativeDiscriminantException ex)
             {
-                WriteLine(ex.Message);
+                log.Error(ex.Message);
             }
            catch (Exception ex)
             {
-                WriteLine(ex.Message);
+                log.Error(ex.Message);
             }
 
 
