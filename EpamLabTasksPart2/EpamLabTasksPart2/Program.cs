@@ -143,18 +143,21 @@ namespace EpamLabTasksPart2
              switch (select)
             {
                 case "1":
-                    var coefficients = InputValuesForQuadraticEquation();
-               var getRoots = new GetRoots(coefficients[0], coefficients[1], coefficients[2]);
+               var coefficientsQ = InputValuesForQuadraticEquation();
+               var getQuadraticRoots = new GetRoots(coefficientsQ[0], coefficientsQ[1], coefficientsQ[2]);
                     int j= 1;
-                    foreach(var i in getRoots.QadraticRoots)
+                    foreach(var i in getQuadraticRoots.QadraticRoots)
                     {
                         WriteLine();
-                        WriteLine("The root {0}={1}", j, i);
+                        WriteLine("X{0}={1}", j, i);
                         j++;
                     }
                     break;
 
                 case "2":
+                    var coefficientsL = InputValuesForLinearEquation();
+                    var getLinearRoots = new GetRoots(coefficientsL[0], coefficientsL[1]);
+                    WriteLine("X=",getLinearRoots.RootLine);
                     break;
 
                 default:
@@ -181,20 +184,15 @@ namespace EpamLabTasksPart2
 
         static void Main(string[] args)
        {
-            //var g = new GetRoots(50, 4, 5);
-            //foreach (var i in g.QadraticRoots)
-            //{
-            //    WriteLine(i);
-            //}
-
-            Menu();
-            //var list = InputValuesForQuadraticEquation();
-            //WriteLine();
-            //foreach (var i in list)
-            //{
-            //    WriteLine(i);
-            //}
-
+            try
+            {
+                Menu();
+            }
+            catch(Exception ex)
+            {
+                WriteLine(ex.Message);
+            }
+        
 
             ReadKey();
         }
