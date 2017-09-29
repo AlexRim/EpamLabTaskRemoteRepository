@@ -1,6 +1,7 @@
 ﻿using System;
 using static System.Math;
 
+using System.IO;
 namespace EquationLibrary
 {
     public class GetRoots
@@ -66,6 +67,41 @@ namespace EquationLibrary
             }
 
 
+       public static double[,] MultyPlyMatrix(double[,] a, double[,] b)
+        {
+            double[,] c = new double[a.GetLength(0), b.GetLength(1)];
+
+            if (a.GetLength(1) == b.GetLength(0))
+            {
+
+                for (int i = 0; i < a.GetLength(0); i++)
+                {
+                    for (int j = 0; j < b.GetLength(1); j++)
+                    {
+
+                        for (int k = 0; k < b.GetLength(0); k++)
+                        {
+                            c[i, j] += a[i, k] * b[k, j];
+                        }
+
+
+                    }
+
+
+
+                }
+
+
+            }
+
+            else
+            {
+                throw new Exception("This action can't be done!");
+            }
+
+            return c;
+
+        }
 
 
     }
