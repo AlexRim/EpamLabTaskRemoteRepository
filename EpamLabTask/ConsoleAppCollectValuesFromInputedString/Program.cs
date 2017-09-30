@@ -54,7 +54,7 @@ namespace ConsoleAppCollectValuesFromInputedString
         private static void Display()
         {
             var list = InputLines();
-         //  var list = new List<string>() {"3","3,5","4","5","3,5","3","8,87768768","fvdf","avdf","bvdf","abcdfgh" };
+         //  var list = new List<string>() {"3","3,5","4","5","3,5","3","8,87768768","fvdf","avdf","bvdf","abcdfghergreg" };
             var integers =list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsInteger(b));
             var doubles = list.Select(x => x.Replace(" ", string.Empty)).Where(b => Checker.IsDouble(b));
             var strings = list.Where(x => !Checker.IsDouble(x) && !Checker.IsInteger(x));
