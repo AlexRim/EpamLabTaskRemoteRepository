@@ -40,7 +40,7 @@ namespace TaskWithPointAndLinq
         static void Main(string[] args)
         {
 
-            var fibonachiList = CreateFibonaciSequence(17);
+            var fibonachiList = CreateFibonaciSequence(15);
 
             foreach (var i in fibonachiList)
 
@@ -51,11 +51,13 @@ namespace TaskWithPointAndLinq
 
             var simple = fibonachiList.Where(x => x.IsIntSimple()).Count();
             var divideByFive = fibonachiList.Where(x => x % 5 == 0).Count();
-            var divideByDigitsSum = fibonachiList.Where(x => x % x.ToString().Sum(y => int.Parse(y.ToString()))==0).Count();
-            var sqrtFromDigitsContainsTwo = fibonachiList.Where(x => x.ToString().Contains("2")).Select(y =>Floor( Sqrt(y))).ToArray();
+            var divideByDigitsSum = fibonachiList.Where(x => x % x.ToString().Sum(y => int.Parse(y.ToString())) == 0).Count();
+            var sqrtFromDigitsContainsTwo = fibonachiList.Where(x => x.ToString().Contains("2")).Select(y => Floor(Sqrt(y))).ToArray();
+
+            var sortBySecondDigit = fibonachiList.Where(x => x >= 10).Select(z => z.ToString()).OrderByDescending(x =>Convert.ToInt32(x[1]));
+
 
             WriteLine();
-
             WriteLine(" Simple numbers Count:{0}", simple);
             WriteLine("numbers that are divided by 5:{0}", divideByFive);
             WriteLine(" numbers are divided by the sum of their digits:{0}", divideByDigitsSum);
@@ -65,7 +67,12 @@ namespace TaskWithPointAndLinq
                 WriteLine(i);
             }
 
-           
+            WriteLine("\nSorted by Second Digit Values:");
+            foreach(var i in sortBySecondDigit)
+            {
+                WriteLine(i);
+            }
+
 
 
 
