@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntExtension.cs" />
     <Compile Include="Keeper.cs" />
     <Compile Include="MyMathClass.cs" />
     <Compile Include="MyPoint.cs" />
