@@ -8,11 +8,11 @@ namespace TaskWithPointAndLinq
 {
   public static  class IntExtension
     {
-        public static bool IsIntSimple(this int x)
+        public static bool IsIntSimple(this ulong x)
         {
             for (int i = 2; i <= (int)(x / 2); i++)
             {
-                if (x % i == 0)
+                if ((int)x % i == 0)
                     return false;
             }
             return true;

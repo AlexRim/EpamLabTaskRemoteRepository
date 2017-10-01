@@ -12,14 +12,14 @@ namespace TaskWithPointAndLinq
     {
 
 
-        private static List<int> CreateFibonaciSequence(int n)
+        private static List<ulong> CreateFibonaciSequence(int n)
         {
-            var list = new List<int>();
+            var list = new List<ulong>();
             int i = 1;
             while (list.Count <= n)
             {
                 
-                list.Add(MyMathClass.Fibonacci(i));
+                list.Add((ulong)MyMathClass.Fibonacci(i));
                 i++;
                
               
@@ -40,7 +40,7 @@ namespace TaskWithPointAndLinq
         static void Main(string[] args)
         {
 
-            var fibonachiList = CreateFibonaciSequence(15);
+            var fibonachiList = CreateFibonaciSequence(200);
 
             foreach (var i in fibonachiList)
 
@@ -51,11 +51,18 @@ namespace TaskWithPointAndLinq
 
             var simple = fibonachiList.Where(x => x.IsIntSimple()).Count();
             var divideByFive = fibonachiList.Where(x => x % 5 == 0).Count();
-            var divideByDigitsSum = fibonachiList.Where(x => x % x.ToString().Sum(y => int.Parse(y.ToString())) == 0).Count();
+            var divideByDigitsSum = fibonachiList.Where(x=>x>0).Where(x =>(int) x % x.ToString().Sum(y => Convert.ToInt32(y.ToString())) == 0).Count();
             var sqrtFromDigitsContainsTwo = fibonachiList.Where(x => x.ToString().Contains("2")).Select(y => Floor(Sqrt(y))).ToArray();
-
             var sortBySecondDigit = fibonachiList.Where(x => x >= 10).Select(z => z.ToString()).OrderByDescending(x =>Convert.ToInt32(x[1]));
 
+
+            //  var newArray = fibonachiList.Where(x => x % 3 == 0).Take(5).Where(y => y % 5 == 0).Skip(5).Where(c => c % 5 == 0).Select(m=>(m.ToString()[m.ToString().Length]+ m.ToString()[m.ToString().Length-1]));
+
+            var sq = fibonachiList.Where(x => (int)x%3==0).TakeWhile((s, i) => (int)s%5==0 && i < 6);
+            //IEnumerable<string> auto = cars.TakeWhile((s, i) => s.Length < 12 && i < 5);
+
+            //foreach (string str in auto)
+            //    Console.WriteLine(str);
 
             WriteLine();
             WriteLine(" Simple numbers Count:{0}", simple);
@@ -72,6 +79,11 @@ namespace TaskWithPointAndLinq
             {
                 WriteLine(i);
             }
+
+
+
+            WriteLine("\nTask 6 values:");
+            WriteLine(sq.Count());
 
 
 
