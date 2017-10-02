@@ -3,15 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace TaskWithPointAndLinq
 {
 
    public static class MyMathClass
     {
+        public static List<BigInteger> GetFibonacciList(int n)
+        {
+            var list = new List<BigInteger>();
+           BigInteger first = 0;
+            BigInteger second = 1;
+           BigInteger result = 0;
 
+            list.Add(0);
+            list.Add(1);
 
-        public static int Factorial(int x)
+            if (n == 0)
+            {
+                list.Clear();
+                list.Add(0);
+            }
+            if (n == 1)
+            {
+                list.Clear();
+                list.Add(0);
+                list.Add(1);
+            }
+            for (int i = 2; i <= n; i++)
+            {
+                result = first + second;
+                first = second;
+                second = result;
+                list.Add(result);
+            }
+
+            return list;
+
+        }
+
+        public static BigInteger Factorial(int x)
         {
             if(x==0)
             {
@@ -24,7 +56,7 @@ namespace TaskWithPointAndLinq
             }
         }
 
-      public  static int Fibonachi(int n)
+      public  static BigInteger Fibonachi(int n)
         {
             if (n == 0)
             {
@@ -42,13 +74,13 @@ namespace TaskWithPointAndLinq
             }
         }
 
-        public static int Fibonacci(int n)
+        public static BigInteger Fibonacci(BigInteger n)
         {
-            int a = 0;
-            int b = 1;        
+            BigInteger a = 0;
+            BigInteger b = 1;        
             for (int i = 0; i < n; i++)
             {
-                int temp = a;
+                BigInteger temp = a;
                 a = b;
                 b = temp + b;
             }
