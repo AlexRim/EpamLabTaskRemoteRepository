@@ -31,7 +31,7 @@ namespace TaskWithPointAndLinq
                 list.Add(0);
                 list.Add(1);
             }
-            for (int i = 2; i <= n; i++)
+            for (int i = 2; i < n; i++)
             {
                 result = first + second;
                 first = second;
