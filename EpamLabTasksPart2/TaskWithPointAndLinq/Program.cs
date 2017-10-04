@@ -49,11 +49,9 @@ namespace TaskWithPointAndLinq
         {
             try
             {
-                var fibonachiList = CreateFibonaciSequence(30);
-
-              
-         
-                var simple = fibonachiList.Where(x => x.IsIntSimple()).Count();
+                var fibonachiList = CreateFibonaciSequence(200);
+           
+                var simple = fibonachiList.Where(x => x.IsProbablePrime(20)).Count();
                 var divideByFive = fibonachiList.Where(x => x % 5 == 0).Count();
                 var divideByDigitsSum = fibonachiList.Where(x => x > 0).Where(x => x % x.ToString().Sum(y => Convert.ToInt32(y.ToString())) == 0).Count();
                 var sqrtFromDigitsContainsTwo = fibonachiList.Where(x => x.ToString().Contains("2")).Select(y => Floor(Sqrt((double)y))).ToArray();
