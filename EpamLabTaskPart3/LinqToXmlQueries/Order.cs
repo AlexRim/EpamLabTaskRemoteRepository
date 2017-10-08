@@ -26,7 +26,10 @@ namespace LinqToXmlQueries
             set;
         }
 
-
+        public override string ToString()
+        {
+            return Total+" "+OrderDate+" "+Id+" ";
+        }
 
     }
 }

@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace LinqToXmlQueries
 {
-    class Customer
+  public  class Customer
     {
-        private List<Order> orders = new List<Order>();
+        private List<Order> orders;
+
+        public string FirstOrderDate
+        {
+            get;
+            set;
+        }
+
+        private string region = "";
+   
 
         public string Name
         {
@@ -47,5 +56,36 @@ namespace LinqToXmlQueries
             set;
         }
         public List<Order> Orders { get => orders; set => orders = value; }
+
+        public double TurnOver
+        {
+            get;
+            set;
+        }
+        public string Region { get => region; set => region = value; }
+
+        public override string ToString()
+        {
+            return Name + "\n" + FirstOrderDate + "\n" + TurnOver + "\n\n";
+        }
+
+        public string PostalCode
+        {
+            get;
+            set;
+        }
+
+     public double   AverageProfitability
+        {
+            get;
+            set;
+        }
+
+        public string City
+        {
+            get;
+            set;
+        }
+
     }
 }
