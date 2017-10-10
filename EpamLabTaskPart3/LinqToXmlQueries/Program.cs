@@ -69,51 +69,112 @@ namespace LinqToXmlQueries
 
                 //task 7
 
-   //             var task7 = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() > 0).
-   //                    Select(x => new Customer
-   //                    {
-   //                        City = x.Element("city").Value,
-   //                        Name = x.Element("name").Value,
-   //                        Country = x.Element("country").Value,
-   //                        Orders = x.Element("orders").Elements("order").
-   //Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value }).ToList()
-   //                    }).Select(x)
+                var task7 = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() >=0)
 
+                  .Select(x => new Customer
+                  {
+                      City = x.Element("city").Value,
+                      Name = x.Element("name").Value,
+                      Country = x.Element("country").Value,
+                      Orders = x.Element("orders").Elements("order").
+       Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value }).ToList()
+                  }).Select(x => new { City = x.City, TotalSum =x.Orders.Sum(z=>z.Total.ConvertToDoubleValue()), OrdersCount=x.Orders.Count() }).
+                  GroupBy(x=>x.City).Select(x=>new {City=x.Key,AverageTotalSum=x.Average(z=>z.TotalSum),
+                     Intensity=x.Average(z=>z.OrdersCount)
+                  });
 
+                //task 8
 
+                var task83 = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() >= 0)
 
+                  .Select(x => new Customer
+                  {
+                      Name = x.Element("name").Value,
+                      Orders = x.Element("orders").Elements("order").
+       Select(z => new Order { OrderDate = z.Element("orderdate").Value }).ToList()
+                  }).SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.OrderDate.ConvertToDateTime() }).
+ GroupBy(x => new { x.Name, x.OrderDate.Year, x.OrderDate.Month }, (key, group) => new { Name = key.Name, OrderMonth = key.Month, OrderYear = key.Year, OrderCount = group.Count() }).
+                  Select(x => new { Year = x.OrderYear, Month = x.OrderMonth, OrderCount = x.OrderCount, Name = x.Name }).
+                  GroupBy(x => x.Name);
 
-
-                foreach (var i in task6)
-                {
-                   
-                        WriteLine(i.Name+"//// "+ i.Phone);
-
-
-                }
-
-
-                //string str = "1997-10-03T00:00:00";
-                //var dateTime = DateTime.Parse(str);
-
-                //WriteLine(dateTime.ToString());
-
-
-                //   .Value.FormatingDoubleValue()) > 5000)
-                //   Where(z=>double.Parse(z.Element("total").Value.FormatingDoubleValue())>5000).              
-                //Select(c => new Customer { Name = c.Element("name").Value, Country = c.Element("country").Value }));
-
-
-
-
-                //var ernst = xdoc.Element("customers").Elements("customer").First(x => x.Element("name").Value == "QUICK-Stop")
-                //    .Element("orders").Elements("order")
-                //   .Sum(z => double.Parse(z.Element("total").Value.Replace('.', ',')));
-
-                //foreach (var i in q)
+                //foreach (var i in task83)
                 //{
-                //    WriteLine(i.Name);
+                //    Console.WriteLine(i.Key);
+                //    foreach (var t in i)
+                //        Console.WriteLine(t.Month+"."+t.Year+" "+t.OrderCount);
+                //    Console.WriteLine();
                 //}
+
+              var  task81= xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() >= 0)
+
+                  .Select(x => new Customer
+                  {
+                      Name = x.Element("name").Value,
+                      Orders = x.Element("orders").Elements("order").
+       Select(z => new Order { OrderDate = z.Element("orderdate").Value }).ToList()
+                  }).SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.OrderDate.ConvertToDateTime() }).
+                  GroupBy(x => new { x.Name, x.OrderDate.Month },
+                  (key, group) => new { Name = key.Name, OrderMonth = key.Month, OrderCount = group.Count() }).
+                    Select(x => new { Month = x.OrderMonth, OrderCount = x.OrderCount, Name = x.Name }).GroupBy(x => x.Name);
+
+                //foreach (var i in task81)
+                //{
+                //    Console.WriteLine(i.Key);
+                //    foreach (var t in i)
+                //        Console.WriteLine(t.Month  + " " + t.OrderCount);
+                //    Console.WriteLine();
+                //}
+
+
+                var task82 = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() >= 0)
+
+                .Select(x => new Customer
+                {
+                    Name = x.Element("name").Value,
+                    Orders = x.Element("orders").Elements("order").
+     Select(z => new Order { OrderDate = z.Element("orderdate").Value }).ToList()
+                }).SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.OrderDate.ConvertToDateTime() }).
+                GroupBy(x => new { x.Name, x.OrderDate.Year },
+                (key, group) => new { Name = key.Name, OrderYear = key.Year, OrderCount = group.Count() }).
+                  Select(x => new {Year = x.OrderYear, OrderCount = x.OrderCount, Name = x.Name }).GroupBy(x => x.Name);
+
+
+
+
+                foreach (var i in task82)
+                {
+                    Console.WriteLine(i.Key);
+                    foreach (var t in i)
+                        Console.WriteLine(t.Year + " " + t.OrderCount);
+                    Console.WriteLine();
+                }
+                //            var qry = cust.GroupBy(cm =>
+                //new { cm.Customer, cm.OrderDate },
+                //(key, group) => new { Key1 = key.Customer, Key2 = key.OrderDate, Count = group.Count() });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //foreach (var i in task7)
+                //{
+
+                //    WriteLine(i.City + "\n " + i.AverageTotalSum+"\n "+i.Intensity+"\n\n");
+
+
+
+
+                //}
+
+
 
 
 
