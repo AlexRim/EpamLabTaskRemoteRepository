@@ -11,8 +11,35 @@ using static System.Console;
 
 namespace LinqToXmlQueries
 {
-    class Program
+   public class Program
     {
+
+
+
+
+
+
+
+
+
+        public static List<Customer> GetCustomersList()
+        {
+            XDocument xdoc = XDocument.Load("Customers.xml");
+            var customersList = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count() > 0)
+               .Select(x => new Customer
+               {
+                   Name = x.Element("name").Value,
+                   Country = x.Element("country").Value,
+                   Orders = x.Element("orders").Elements("order").
+    Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value }).ToList()
+
+               }).ToList();
+
+            return customersList;
+        }
+
+
+
         static void Main(string[] args)
         {
             XDocument xdoc = XDocument.Load("Customers.xml");
@@ -20,15 +47,32 @@ namespace LinqToXmlQueries
 
             try
             {
+                var list = GetCustomersList();
+
+                foreach(var i in list)
+                {
+                    WriteLine(i);
+                }
+
+
+
+
+
+
+
 // query task2
  var clientGroupadByCountry = xdoc.Element("customers").Elements("customer").
                     Select(x => new Customer { Name = x.Element("name").Value, Country = x.Element("country").Value }).GroupBy(x=>x.Country);
 // query task1
-     var clientsWithSumOfAllOrdersMoreThanX = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order")
-              .Sum(z => double.Parse(z.Element("total").Value.FormatingDoubleValue())) > 100000).
+     var clientsWithSumOfAllOrdersMoreThanX = xdoc.Element("customers").Elements("customer").
+                    Where(x => x.Element("orders").Elements("order")
+              .Sum(z => double.Parse(z.Element("total").Value.FormatingDoubleValue())) > 1000).
                 Select(x => new Customer { Name = x.Element("name").Value, Country = x.Element("country").Value });
 
-
+                foreach(var i in clientsWithSumOfAllOrdersMoreThanX)
+                {
+                    WriteLine(i.Name);
+                }
                 //query task3
                 var clientWithMaxTotalSumMoreThanX = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count()>0 &&
                  x.Element("orders").Elements("order").Max(z => double.Parse(z.Element("total").Value.FormatingDoubleValue())) >3800).
@@ -137,59 +181,6 @@ namespace LinqToXmlQueries
                 GroupBy(x => new { x.Name, x.OrderDate.Year },
                 (key, group) => new { Name = key.Name, OrderYear = key.Year, OrderCount = group.Count() }).
                   Select(x => new {Year = x.OrderYear, OrderCount = x.OrderCount, Name = x.Name }).GroupBy(x => x.Name);
-
-
-
-
-                foreach (var i in task82)
-                {
-                    Console.WriteLine(i.Key);
-                    foreach (var t in i)
-                        Console.WriteLine(t.Year + " " + t.OrderCount);
-                    Console.WriteLine();
-                }
-                //            var qry = cust.GroupBy(cm =>
-                //new { cm.Customer, cm.OrderDate },
-                //(key, group) => new { Key1 = key.Customer, Key2 = key.OrderDate, Count = group.Count() });
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //foreach (var i in task7)
-                //{
-
-                //    WriteLine(i.City + "\n " + i.AverageTotalSum+"\n "+i.Intensity+"\n\n");
-
-
-
-
-                //}
-
-
-
-
-
-
-
-                //foreach (var i in items)
-                //{
-                //    Console.WriteLine(i.Key);
-                //    foreach (var t in i)
-                //        Console.WriteLine(t.Name);
-                //    Console.WriteLine();
-                //}
-
-
-
 
             }
             catch (Exception ex)

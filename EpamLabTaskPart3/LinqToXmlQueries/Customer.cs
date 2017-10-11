@@ -10,6 +10,14 @@ namespace LinqToXmlQueries
     {
         private List<Order> orders;
 
+
+        public string Id
+        {
+            get;
+            set;
+        }
+
+
         public string FirstOrderDate
         {
             get;
@@ -25,11 +33,7 @@ namespace LinqToXmlQueries
             set;
         }
 
-        public string Id
-        {
-            get;
-            set;
-        }
+  
 
         public string Address
         {
