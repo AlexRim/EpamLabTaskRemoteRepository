@@ -74,9 +74,9 @@ namespace LinqToXmlQueries
                     WriteLine(i.Name);
                 }
                 //query task3
-                var clientWithMaxTotalSumMoreThanX = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count()>0 &&
-                 x.Element("orders").Elements("order").Max(z => double.Parse(z.Element("total").Value.FormatingDoubleValue())) >3800).
-                Select(x => new Customer { Name = x.Element("name").Value, Country = x.Element("country").Value });
+  var clientWithMaxTotalSumMoreThanX = xdoc.Element("customers").Elements("customer").Where(x => x.Element("orders").Elements("order").Count()>0 &&
+  x.Element("orders").Elements("order").Max(z => double.Parse(z.Element("total").Value.FormatingDoubleValue())) >3800).
+ Select(x => new Customer { Name = x.Element("name").Value, Country = x.Element("country").Value });
 
 
                 //query task 4
@@ -86,8 +86,10 @@ namespace LinqToXmlQueries
                     Name = x.Element("name").Value,
                     Country = x.Element("country").Value,
                     Orders = x.Element("orders").Elements("order").
-   Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value }).ToList()
-                }).Select(x => new Customer { Name = x.Name,FirstOrderDate=x.Orders.FirstOrDefault().OrderDate.ConvertDateTimeFormat()});
+   Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value })
+   .ToList()
+                }).
+          Select(x => new Customer { Name = x.Name,FirstOrderDate=x.Orders.FirstOrDefault().OrderDate.ConvertDateTimeFormat()});
 
 
                 //query task 5
@@ -98,7 +100,8 @@ namespace LinqToXmlQueries
                     Country = x.Element("country").Value,
                     Orders = x.Element("orders").Elements("order").
          Select(z => new Order { Id = z.Element("id").Value, OrderDate = z.Element("orderdate").Value, Total = z.Element("total").Value }).ToList()
-                }).Select(x => new Customer { Name = x.Name, FirstOrderDate = x.Orders.FirstOrDefault().OrderDate.ConvertDateTimeFormat(), TurnOver = x.Orders.Sum(b => b.Total.ConvertToDoubleValue()) }).
+                }).Select(x => new Customer { Name = x.Name, FirstOrderDate = x.Orders.FirstOrDefault().
+                OrderDate.ConvertDateTimeFormat(), TurnOver = x.Orders.Sum(b => b.Total.ConvertToDoubleValue()) }).
                 OrderBy(x => x.FirstOrderDate.ConvertToDateTime().Year).OrderBy(x => x.FirstOrderDate.ConvertToDateTime().Month).
                 OrderByDescending(x => x.TurnOver).OrderBy(x => x.Name);
 
@@ -108,7 +111,7 @@ namespace LinqToXmlQueries
                .Where(x => x.Element("postalcode").Value.NoneNumberFormat() == false).Concat(xdoc.Element("customers").Elements("customer").
                Where(x => x.Descendants().Contains(x.Element("region"))==false)).Concat(xdoc.Element("customers").Elements("customer").
                Where(x=>x.Element("phone").Value.PhoneCodeDoesntMatch()))
-                .Select(x => new Customer {Phone=x.Element("phone").Value, Name = x.Element("name").Value, Country = x.Element("country").Value });
+                .Select(x => new Customer {Phone=x.Element("phone").Value, Name = x.Element("name").Value, Country = x.Element("country").Value }).ToList();
 
 
                 //task 7

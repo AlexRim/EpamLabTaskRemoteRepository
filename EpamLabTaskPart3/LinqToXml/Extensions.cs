@@ -40,7 +40,8 @@ namespace LinqToXml
 
         public static List<IGrouping<string, Customer>> GetTask2List(this List<Customer> list)=>list.GroupBy(x => x.Country).ToList();
 
-        public static List<Customer> GetTask3List(this List<Customer> list, double x) => list.Select(b=>b).Where(z => z.Orders.Select(y => y.Total).Max() > x).ToList(); 
-           
+        public static List<Customer> GetTask3List(this List<Customer> list, double x) => list.Where(b => b.Orders.Count() > 0 && b.Orders.Max(z => z.Total > x)).ToList();
+
+        
     }
 }
