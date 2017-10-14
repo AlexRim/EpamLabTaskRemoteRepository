@@ -42,7 +42,7 @@ namespace LinqToXml
               Country = "Belarus",
               Region = "Europe",
               Orders = new List<Order>
-            { new Order {Id="1258",Total=7000,Orderdate="2000-01-21T00:00:00" }}
+            { new Order {Id="1258",Total=7000,Orderdate="2001-01-21T00:00:00" }}
            
           };
         }
@@ -168,7 +168,41 @@ namespace LinqToXml
         }
 
 
+        [Test]
+        public void TestForTask82()
+        {
+            customersList.Add(customer);
+            customersList.Add(customerForTask7);
 
+            var list = customersList.SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.Orderdate.ConvertToDateTime() }).
+                    GroupBy(x => new { x.Name, x.OrderDate.Year },
+                    (key, group) => new { Name = key.Name, OrderYear = key.Year, OrderCount = group.Count() });
+
+            var cust = list.FirstOrDefault(x => x.Name == "Zhuravinka" && x.OrderYear == 2000);
+           
+            var cust1 = list.FirstOrDefault(x => x.Name == "Zhuravinka" && x.OrderYear == 2001);
+            Assert.AreEqual(2, cust.OrderCount);
+            Assert.AreEqual(1, cust1.OrderCount);
+
+        }
+
+
+        [Test]
+        public void TestForTask83()
+        {
+            customersList.Add(customer);
+            customersList.Add(customerForTask7);
+
+            var list = customersList.SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.Orderdate.ConvertToDateTime() }).
+                    GroupBy(x => new { x.Name, x.OrderDate.Year, x.OrderDate.Month },
+                    (key, group) => new { Name = key.Name, OrderYear = key.Year, OrderMonth = key.Month, OrderCount = group.Count() }).ToList();
+
+            var cust = list.FirstOrDefault(x => x.Name == "Zhuravinka" && x.OrderYear == 2000 && x.OrderMonth == 1);
+            var cust1 = list.FirstOrDefault(x => x.Name == "Zhuravinka" && x.OrderYear == 2001 && x.OrderMonth == 1);
+            Assert.AreEqual(1, cust.OrderCount);
+            Assert.AreEqual(1, cust1.OrderCount);
+
+        }
 
 
 

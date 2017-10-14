@@ -80,7 +80,7 @@ namespace LinqToXml
                     Region = "Europe",
                     Orders = new List<Order>
             { new Order {Id="1258",Total=7000,Orderdate="2000-01-21T00:00:00" },
-           new Order {Id="1254",Total=3000,Orderdate="2000-02-21T00:00:00" } }
+           new Order {Id="1254",Total=3000,Orderdate="2001-02-21T00:00:00" } }
                 };
 
 
@@ -93,18 +93,19 @@ namespace LinqToXml
 
                 //var list = GetCustomersList().GetTask3List(500);
                 var list1 = list.SelectMany(x => x.Orders, (x, y) => new { Name = x.Name, OrderDate = y.Orderdate.ConvertToDateTime() }).
-                    GroupBy(x => new { x.Name, x.OrderDate.Month },
-                    (key, group) => new { Name = key.Name, OrderMonth = key.Month, OrderCount = group.Count() })/*.GroupBy(x => x.Name)*/;
+                    GroupBy(x => new { x.Name, x.OrderDate.Year,x.OrderDate.Month },
+                    (key, group) => new { Name = key.Name, OrderYear=key.Year, OrderMonth=key.Month, OrderCount = group.Count() }).ToList();
+                    /*.GroupBy(x => x.Name)*/
 
-                var cust = list1.FirstOrDefault(x => x.Name == "Zhuravinka"&&x.OrderMonth==1);
-                WriteLine(cust.OrderCount + " " + cust.OrderMonth + " " + cust.Name);
+                var cust = list1.FirstOrDefault(x => x.Name == "Zhuravinka" && x.OrderYear == 2000&&x.OrderMonth==1);
+                WriteLine(cust.OrderCount + " " + cust.OrderYear + " " + cust.Name);
 
                 //foreach (var i in list1)
                 //{
                 //    Console.WriteLine(i/*.Key*/);
                 //    //foreach (var t in i)
                 //    //    Console.WriteLine(t.OrderMonth + " " + t.OrderCount);
-                //    Console.WriteLine();
+                //    //Console.WriteLine();
                 //}
 
 
