@@ -11,41 +11,58 @@ namespace PageObjects
 {
     public class LoginPageObject
     {
-
+        private readonly int timeToWaitSeconds = 10;
 
         private IWebDriver driver;
 
-        [FindsBy(How = How.LinkText, Using = "Log Out")]
-        private IWebElement Log_Out_Link
-        {
-            get; set;
-        }
+        //[FindsBy(How = How.LinkText, Using = "Log Out")]
+        //public IWebElement Log_Out_Link
+        //{
+        //    get; 
+        //}
 
 
-        [FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_UserName")]
-        private IWebElement UserNameInput
-        {
-            get; set;
-        }
+        //[FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_UserName")]
+        //public IWebElement UserNameInput
+        //{
+        //    get; 
+        //}
 
-        [FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_Password")]
-        private IWebElement PasswordInput
-        {
-            get; set;
-        }
+       // [FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_Password")]
+       //public IWebElement PasswordInput
+       // {
+       //     get;
+       // }
 
-        [FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_LoginButton")]
-        private IWebElement LoginButton
-        {
-            get;
-            set;
-        }
+        //[FindsBy(How = How.Id, Using = "ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_LoginButton")]
+        //public IWebElement LoginButton
+        //{
+        //    get;          
+        //}
 
 
         public LoginPageObject(IWebDriver driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            //PageFactory.InitElements(driver, this);
         }
+
+
+        public IWebElement UserNameInput
+        {
+            get => this.driver.MyFindElement(By.Id("ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_UserName"), timeToWaitSeconds);
+        }
+
+
+        public IWebElement PasswordInput
+        {
+            get => this.driver.MyFindElement(By.Id("ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_txt_Password"), timeToWaitSeconds);
+        }
+
+        public IWebElement LoginButton
+        {
+            get => this.driver.MyFindElement(By.Id("ctl00_ctl45_g_e504d159_38de_4cbf_9f4d_b2c12b300979_ctl00_LoginButton"), timeToWaitSeconds);
+        }
+
     }
 }

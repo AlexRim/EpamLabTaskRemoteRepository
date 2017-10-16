@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace FrameWork
+namespace PageObjects
 {
-   public static class WebDriverExtensions
+    public static class WebDriverExtensions
     {
+
         public static IWebElement MyFindElement(this IWebDriver driver, By by, int timeOutSeconds)
         {
             if (timeOutSeconds > 0)
@@ -19,6 +20,5 @@ namespace FrameWork
             }
             return driver.FindElement(by);
         }
-
     }
 }

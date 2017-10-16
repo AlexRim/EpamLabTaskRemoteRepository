@@ -47,18 +47,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleToolsPageObject.cs" />
+    <Compile Include="JournalArticlePageObject.cs" />
     <Compile Include="JournalItemsPageObject.cs" />
     <Compile Include="LoginPageObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebDriverExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FrameWork\FrameWork.csproj">
-      <Project>{bb838542-5bd7-4635-9c33-7c6afaaf41f1}</Project>
-      <Name>FrameWork</Name>
+    <ProjectReference Include="..\DriverManagers\DriverManagers.csproj">
+      <Project>{f5641718-4487-4de2-9fba-8af18dd4dbee}</Project>
+      <Name>DriverManagers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
