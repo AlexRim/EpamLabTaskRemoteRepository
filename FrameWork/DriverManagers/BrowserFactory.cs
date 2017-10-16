@@ -10,7 +10,7 @@ namespace DriverManagers
 {
    public class BrowserFactory
     {
-     //   private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
+        private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
         private static IWebDriver driver;
 
         public static IWebDriver Driver
@@ -40,7 +40,7 @@ namespace DriverManagers
                     if (driver == null)
                     {
                         driver = new FirefoxDriver();
-                     //   Drivers.Add("Firefox", Driver);
+                        Drivers.Add("Firefox", Driver);
 
                     }
                     break;
@@ -48,7 +48,7 @@ namespace DriverManagers
                     if (driver == null)
                     {
                         driver = new ChromeDriver(@"E:\EpamLabTasks\FrameWork\FrameWork\bin\Debug");
-                      //  Drivers.Add("Chrome", Driver);
+                        Drivers.Add("Chrome", Driver);
                     }
                     break;
             }
@@ -64,16 +64,14 @@ namespace DriverManagers
 
         public static void CloseAllDrivers()
         {
-            //foreach (var key in Drivers.Keys)
-            //{
-            //   Drivers[key].Close();
-            //   Drivers[key].Quit();
+            foreach (var key in Drivers.Keys)
+            {
+                Drivers[key].Close();
+                Drivers[key].Quit();
 
-            //}
-            Driver.Close();
-            Driver.Quit();
-            Driver.Dispose();
-    
+            }
+
+
 
         }
 
